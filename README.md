@@ -1,3 +1,15 @@
+
+---
+title: Siamese Match
+emoji: 🤗
+colorFrom: blue
+colorTo: red
+sdk: gradio
+sdk_version: 3.50.2
+app_file: app/serve.py
+pinned: false
+---
+
 # 🧬 Siamese MLP – Identity Matching via Deep Learning
 
 This project implements a Siamese neural network for structured identity matching, inspired by real-world use cases like adtech identity resolution (e.g., data ingestion and linkage).
