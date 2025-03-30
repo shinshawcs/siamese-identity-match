@@ -21,16 +21,20 @@ app = FastAPI()
 model_path = "checkpoints/siamese_model.pt"
 encoder_path = "checkpoints/encoder.pkl"
 
-encoder = joblib.load(encoder_path)
-required_columns = encoder.feature_names_in_.tolist()
+try:
+    encoder = joblib.load(encoder_path)
+    required_columns = encoder.feature_names_in_.tolist()
 
-dummy_df = pd.DataFrame(columns=encoder.feature_names_in_)
-dummy_df.loc[0] = ["unknown"] * len(encoder.feature_names_in_)
-input_dim = encoder.transform(dummy_df).shape[1]
+    dummy_df = pd.DataFrame(columns=encoder.feature_names_in_)
+    dummy_df.loc[0] = ["unknown"] * len(encoder.feature_names_in_)
+    input_dim = encoder.transform(dummy_df).shape[1]
 
-model = SiameseMLP(input_dim=input_dim)
-model.load_state_dict(torch.load(model_path, map_location="cpu"))
-model.eval()
+    model = SiameseMLP(input_dim=input_dim)
+    model.load_state_dict(torch.load(model_path, map_location="cpu"))
+    model.eval()
+    print("✅ Model loaded successfully")
+except Exception as e:
+    print("❌ Failed to load model:", e)
 
 class InputFeatures(BaseModel):
     a: dict
