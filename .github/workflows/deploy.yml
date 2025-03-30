@@ -19,14 +19,4 @@ jobs:
           HF_SPACE_ID: ${{ secrets.HF_SPACE_ID }}
         run: |
           pip install huggingface_hub
-          python -c "
-from huggingface_hub import HfApi
-api = HfApi()
-api.upload_folder(
-    repo_id='${{ secrets.HF_SPACE_ID }}',
-    repo_type='space',
-    folder_path='.',          
-    path_in_repo='',
-    token='${{ secrets.HF_TOKEN }}',
-    allow_patterns=['*.py', '*.pt', '*.pkl', '*.txt', '*.md', 'Dockerfile', '**/*.py', '**/*.pt', '**/*.pkl']
-)"
+          python -c "from huggingface_hub import HfApi; api = HfApi(); api.upload_folder(repo_id='${{ secrets.HF_SPACE_ID }}', repo_type='space', folder_path='.', path_in_repo='', token='${{ secrets.HF_TOKEN }}', allow_patterns=['*.py', '*.pt', '*.pkl', '*.txt', '*.md', 'Dockerfile', '**/*.py', '**/*.pt', '**/*.pkl'])" 
