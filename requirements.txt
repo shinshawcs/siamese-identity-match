@@ -1,6 +1,10 @@
 fastapi
 uvicorn
 torch
-joblib
 scikit-learn
+joblib
 pandas
+pydantic
+numpy
+mlflow
+wandb
