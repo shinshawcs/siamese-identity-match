@@ -42,6 +42,10 @@ class InputFeatures(BaseModel):
 def fill_missing_keys(d, keys, default="unknown"):
         return {k: d.get(k, default) for k in keys}
 
+@app.get("/")
+def health_check():
+    return {"status": "✅ Running", "version": "1.0.0"}
+
 @app.post("/predict")
 async def predict(data: InputFeatures):
 
