@@ -1,0 +1,30 @@
+name: Deploy to Hugging Face Spaces
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Upload to Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_SPACE_ID: ${{ secrets.HF_SPACE_ID }}
+        run: |
+          pip install huggingface_hub
+          huggingface-cli login --token "$HF_TOKEN"
+          huggingface-cli upload $HF_SPACE_ID hf_spaces/ \
+            --repo-type=space \
+            --include "*.py" \
+            --include "*.pkl" \
+            --include "*.pt" \
+            --include "Dockerfile" \
+            --include "*.txt" \
+            --include "*.md"
