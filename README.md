@@ -5,8 +5,7 @@ emoji: 🤗
 colorFrom: blue
 colorTo: red
 sdk: docker
-app_file: app/serve.py
-pinned: false
+pinned: true
 ---
 
 # 🧬 Siamese MLP – Identity Matching via Deep Learning
