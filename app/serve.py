@@ -3,7 +3,7 @@ from pydantic import BaseModel
 import torch
 import joblib
 import numpy as np
-from models.siamese_mlp import SiameseMLP
+from app.models.siamese_mlp import SiameseMLP
 import os
 import pandas as pd
 import warnings
