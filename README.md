@@ -4,7 +4,7 @@ title: Siamese Match
 emoji: 🤗
 colorFrom: blue
 colorTo: red
-sdk: Docker
+sdk: docker
 app_file: app/serve.py
 pinned: false
 ---
