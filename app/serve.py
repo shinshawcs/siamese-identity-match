@@ -8,6 +8,13 @@ import os
 import pandas as pd
 import warnings
 
+import os
+print("✅ Current working directory:", os.getcwd())
+print("📂 Files in working dir:", os.listdir())
+
+print("🔎 encoder exists:", os.path.exists("checkpoints/encoder.pkl"))
+print("🔎 model exists:", os.path.exists("checkpoints/siamese_model.pt"))
+
 app = FastAPI()
 
 # 加载模型和 encoder
