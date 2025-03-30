@@ -39,6 +39,7 @@ except Exception as e:
 class InputFeatures(BaseModel):
     a: dict
     b: dict
+    
 def fill_missing_keys(d, keys, default="unknown"):
         return {k: d.get(k, default) for k in keys}
 

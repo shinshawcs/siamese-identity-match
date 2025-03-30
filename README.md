@@ -4,8 +4,7 @@ title: Siamese Match
 emoji: 🤗
 colorFrom: blue
 colorTo: red
-sdk: gradio
-sdk_version: 5.23.1
+sdk: Docker
 app_file: app/serve.py
 pinned: false
 ---
