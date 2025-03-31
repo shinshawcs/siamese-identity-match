@@ -9,3 +9,4 @@ numpy
 prometheus-fastapi-instrumentator
 psycopg2-binary
 python-dotenv
+sqlalchemy
