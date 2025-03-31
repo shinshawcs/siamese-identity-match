@@ -8,7 +8,23 @@ import os
 import pandas as pd
 import warnings
 from prometheus_fastapi_instrumentator import Instrumentator
+import psycopg2
+import json
 
+DB_URL = os.environ.get("DATABASE_URL")
+def log_to_db(a: dict, b: dict, score: float):
+    try:
+        conn = psycopg2.connect(DB_URL)
+        cur = conn.cursor()
+        cur.execute("""
+            INSERT INTO logs (input_a, input_b, match_score)
+            VALUES (%s, %s, %s)
+        """, (json.dumps(a), json.dumps(b), score))
+        conn.commit()
+        cur.close()
+        conn.close()
+    except Exception as e:
+        print("❌ Failed to write to DB:", e)
 
 app = FastAPI()
 instrumentator = Instrumentator()
@@ -63,6 +79,7 @@ async def predict(data: InputFeatures):
 
         with torch.no_grad():
             out = model(a, b).item()
+            log_to_db(data.a, data.b, out)
 
         return {"match_score": out}
     except Exception as e:
