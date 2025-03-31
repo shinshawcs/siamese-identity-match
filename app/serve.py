@@ -12,7 +12,7 @@ from prometheus_fastapi_instrumentator import Instrumentator
 import psycopg2
 import json
 from dotenv import load_dotenv
-from sqlalchemy import SQL, Identifier
+from psycopg2.sql import SQL, Identifier
 from datetime import datetime
 
 MODEL_VERSIONS = {
@@ -116,7 +116,7 @@ async def predict(data: InputFeatures, model: str = Query("v1")):
         with torch.no_grad():
             output = model_obj(a, b)
             out = output[0].item() if output.numel() > 1 else output.item()
-            
+
         log_to_db(model, a_fixed, b_fixed, out)
         return {"match_score": out}
     except Exception as e:
