@@ -7,16 +7,12 @@ from app.models.siamese_mlp import SiameseMLP
 import os
 import pandas as pd
 import warnings
+from prometheus_fastapi_instrumentator import Instrumentator
 
-import os
-print("✅ Current working directory:", os.getcwd())
-print("📂 Files in working dir:", os.listdir())
-
-print("🔎 encoder exists:", os.path.exists("checkpoints/encoder.pkl"))
-print("🔎 model exists:", os.path.exists("checkpoints/siamese_model.pt"))
 
 app = FastAPI()
-
+instrumentator = Instrumentator()
+instrumentator.instrument(app).expose(app)
 # 加载模型和 encoder
 model_path = "checkpoints/siamese_model.pt"
 encoder_path = "checkpoints/encoder.pkl"
@@ -39,7 +35,7 @@ except Exception as e:
 class InputFeatures(BaseModel):
     a: dict
     b: dict
-    
+
 def fill_missing_keys(d, keys, default="unknown"):
         return {k: d.get(k, default) for k in keys}
 
